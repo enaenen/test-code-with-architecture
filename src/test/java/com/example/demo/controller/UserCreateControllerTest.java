@@ -60,7 +60,8 @@ class UserCreateControllerTest {
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.id").value(1))
 				.andExpect(jsonPath("$.email").value("enaenen@naver.com"))
-				.andExpect(jsonPath("$.nickname").value("enaenen"));
+				.andExpect(jsonPath("$.nickname").value("enaenen"))
+				.andExpect(jsonPath("$.status").value("PENDING"));
 	}
 
 
