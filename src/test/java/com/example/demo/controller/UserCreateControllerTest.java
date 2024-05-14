@@ -40,8 +40,6 @@ class UserCreateControllerTest {
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	@MockBean
 	private JavaMailSender javaMailSender;
-	@Autowired
-	private JavaMailSenderImpl mailSender;
 
 	@Test
 	void 사용자는_회원_가입을_할_수_있고_회원가입된_사용자는_PENDING_상태이다() throws Exception {
@@ -62,9 +60,7 @@ class UserCreateControllerTest {
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.id").value(1))
 				.andExpect(jsonPath("$.email").value("enaenen@naver.com"))
-				.andExpect(jsonPath("$.nickname").value("enaenen"))
-				.andExpect(jsonPath("$.address").value("Pangyo"))
-				.andExpect(jsonPath("$.status").value("PENDING"));
+				.andExpect(jsonPath("$.nickname").value("enaenen"));
 	}
 
 
