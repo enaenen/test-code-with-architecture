@@ -43,7 +43,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.ACTIVE);
+    Optional<UserEntity> result = userRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.ACTIVE);
     // then
     assertThat(result.isPresent()).isTrue();
   }
@@ -53,7 +53,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByEmailAndStatus("kok202@naver.com", UserStatus.PENDING);
+    Optional<UserEntity> result = userRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.PENDING);
     // then
     assertThat(result.isEmpty()).isTrue();
   }
