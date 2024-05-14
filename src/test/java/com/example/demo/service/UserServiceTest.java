@@ -47,4 +47,23 @@ public class UserServiceTest {
         .isInstanceOf(ResourceNotFoundException.class);
   }
 
+  @Test
+  void getById는_ACTIVE_상태인_유저를_찾아올_수_있다(){
+    //given
+    //when
+    UserEntity result = userService.getById(1L);
+
+    //then
+    assertThat(result.getNickname()).isEqualTo("enaenen");
+  }
+
+  @Test
+  void getById는_PENDING_상태인_유저를_찾아올_수_없다(){
+    //given
+    //when
+    //then
+    assertThatThrownBy(() -> userService.getById(2L))
+        .isInstanceOf(ResourceNotFoundException.class);
+  }
+
 }
