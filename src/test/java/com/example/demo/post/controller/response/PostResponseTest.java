@@ -1,8 +1,9 @@
-package com.example.demo.post.contoller.response;
+package com.example.demo.post.controller.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.demo.post.contoller.response.PostResponse;
 import com.example.demo.post.domain.Post;
 import com.example.demo.user.controller.response.UserResponse;
 import com.example.demo.user.domain.User;
