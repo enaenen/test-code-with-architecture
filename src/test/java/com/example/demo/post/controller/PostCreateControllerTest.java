@@ -37,7 +37,7 @@ class PostCreateControllerTest {
 				.writerId(1)
 				.build();
 		//when
-		ResponseEntity<PostResponse> result = testContainer.postCreateController.createPost(
+		ResponseEntity<PostResponse> result = testContainer.postCreateController.create(
 				postCreate);
 
 		//then
