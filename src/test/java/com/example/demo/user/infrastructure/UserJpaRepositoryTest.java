@@ -11,10 +11,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest(showSql = true)
 @Sql("/sql/user-repository-test-data.sql")
-public class UserRepositoryTest {
+public class UserJpaRepositoryTest {
 
   @Autowired
-  private UserRepository userRepository;
+  private UserJpaRepository userJpaRepository;
 
 
   @Test
@@ -22,7 +22,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.ACTIVE);
+    Optional<UserEntity> result = userJpaRepository.findByIdAndStatus(1, UserStatus.ACTIVE);
     // then
     assertThat(result.isPresent()).isTrue();
   }
@@ -32,7 +32,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.PENDING);
+    Optional<UserEntity> result = userJpaRepository.findByIdAndStatus(1, UserStatus.PENDING);
     // then
     assertThat(result.isEmpty()).isTrue();
   }
@@ -43,7 +43,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.ACTIVE);
+    Optional<UserEntity> result = userJpaRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.ACTIVE);
     // then
     assertThat(result.isPresent()).isTrue();
   }
@@ -53,7 +53,7 @@ public class UserRepositoryTest {
     // given
 
     // when
-    Optional<UserEntity> result = userRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.PENDING);
+    Optional<UserEntity> result = userJpaRepository.findByEmailAndStatus("enaenen@naver.com", UserStatus.PENDING);
     // then
     assertThat(result.isEmpty()).isTrue();
   }
