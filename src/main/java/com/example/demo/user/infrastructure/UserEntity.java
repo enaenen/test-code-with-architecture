@@ -1,4 +1,4 @@
-package com.example.demo.user.repository;
+package com.example.demo.user.infrastructure;
 
 import com.example.demo.user.domain.UserStatus;
 import jakarta.persistence.Column;

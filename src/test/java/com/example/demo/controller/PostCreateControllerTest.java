@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureTestDatabase
 @SqlGroup({
 		@Sql(value = "/sql/post-create-controller-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
-		@Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD),
+		@Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)	,
 })
 class PostCreateControllerTest {
 
@@ -35,7 +35,7 @@ class PostCreateControllerTest {
 
 		//given
 		PostCreate postCreate = PostCreate.builder()
-				.content("hello world")
+				.content("helloworld")
 				.writerId(1)
 				.build();
 		//when
@@ -46,7 +46,7 @@ class PostCreateControllerTest {
 				)
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.id").isNumber())
-				.andExpect(jsonPath("$.content").value("hello world"))
+				.andExpect(jsonPath("$.content").value("helloworld"))
 				.andExpect(jsonPath("$.writer.id").isNumber())
 				.andExpect(jsonPath("$.writer.nickname").value("enaenen"))
 				.andExpect(jsonPath("$.writer.email").value("enaenen@naver.com"));
