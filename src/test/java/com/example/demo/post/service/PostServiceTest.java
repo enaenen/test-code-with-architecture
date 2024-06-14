@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class PostServiceTest {
 
-	private PostService postService;
+	private PostServiceImpl postService;
 
 	@BeforeEach
 	void init() {
@@ -24,7 +24,7 @@ public class PostServiceTest {
 		FakeUserRepository fakeUserRepository = new FakeUserRepository();
 		ClockHolder clockHolder = new TestClockHolder(0L);
 
-		this.postService = PostService.builder()
+		this.postService = PostServiceImpl.builder()
 				.userRepository(fakeUserRepository)
 				.postRepository(fakePostRepository)
 				.clockHolder(clockHolder)
