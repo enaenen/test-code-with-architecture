@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest(showSql = true)
 @Sql("/sql/user-repository-test-data.sql")
-public class UserJpaRepositoryTest {
+public class UserEntityJpaRepositoryTest {
 
   @Autowired
   private UserJpaRepository userJpaRepository;

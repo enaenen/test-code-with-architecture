@@ -4,13 +4,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 
+import com.example.demo.user.domain.User;
 import com.example.demo.user.exception.CertificationCodeNotMatchedException;
 import com.example.demo.user.exception.ResourceNotFoundException;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
 import com.example.demo.user.domain.UserUpdate;
 import com.example.demo.user.infrastructure.UserEntity;
-import com.example.demo.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class UserServiceTest {
     String email = "enaenen@naver.com";
 
     //when
-    UserEntity result = userService.getByEmail(email);
+    User result = userService.getByEmail(email);
 
     //then
     assertThat(result.getNickname()).isEqualTo("enaenen");
@@ -62,7 +62,7 @@ public class UserServiceTest {
   void getById는_ACTIVE_상태인_유저를_찾아올_수_있다(){
     //given
     //when
-    UserEntity result = userService.getById(1L);
+    User result = userService.getById(1L);
 
     //then
     assertThat(result.getNickname()).isEqualTo("enaenen");
@@ -89,7 +89,7 @@ public class UserServiceTest {
     BDDMockito.doNothing().when(javaMailSender).send(any(SimpleMailMessage.class));
 
     //when
-    UserEntity result = userService.create(userCreateDto);
+    User result = userService.create(userCreateDto);
     //then
     assertThat(result.getId()).isNotNull();
     assertThat(result.getStatus()).isEqualTo(UserStatus.PENDING);
@@ -109,10 +109,10 @@ public class UserServiceTest {
    userService.update(1, userUpdate);
 
     //then
-    UserEntity userEntity = userService.getById(1);
-    assertThat(userEntity.getId()).isNotNull();
-    assertThat(userEntity.getAddress()).isEqualTo("경기도 성남시");
-    assertThat(userEntity.getNickname()).isEqualTo("enaenen-1");
+    User user = userService.getById(1);
+    assertThat(user.getId()).isNotNull();
+    assertThat(user.getAddress()).isEqualTo("경기도 성남시");
+    assertThat(user.getNickname()).isEqualTo("enaenen-1");
   }
 
 
@@ -123,7 +123,7 @@ public class UserServiceTest {
     userService.login(1);
 
     //then
-    UserEntity userEntity = userService.getById(1);
+    User userEntity = userService.getById(1);
     assertThat(userEntity.getLastLoginAt()).isGreaterThan(0L);
 //    assertThat(userEntity.getLastLoginAt()).isEqualTo("..."); // fixme
   }
@@ -136,8 +136,8 @@ public class UserServiceTest {
     userService.verifyEmail(2,"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
 
     //then
-    UserEntity userEntity = userService.getById(2);
-    assertThat(userEntity.getStatus()).isEqualTo(UserStatus.ACTIVE);
+    User user = userService.getById(2);
+    assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
 //    assertThat(userEntity.getLastLoginAt()).isEqualTo("..."); // fixme
   }
 
