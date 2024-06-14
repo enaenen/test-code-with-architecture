@@ -8,10 +8,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
-import com.example.demo.model.UserStatus;
-import com.example.demo.model.dto.UserUpdateDto;
-import com.example.demo.repository.UserEntity;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.user.domain.UserStatus;
+import com.example.demo.user.domain.UserUpdate;
+import com.example.demo.user.repository.UserEntity;
+import com.example.demo.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,14 +95,14 @@ class UserControllerTest {
 	@Test
 	void 사용자는_내_정보를_수정할_수_있다() throws Exception {
 		//given
-		UserUpdateDto userUpdateDto = UserUpdateDto.builder().nickname("enaenen-2")
+		UserUpdate userUpdate = UserUpdate.builder().nickname("enaenen-2")
 				.address("Pangyo").build();
 		//when
 		//then
 		mockMvc.perform(put("/api/users/me")
 						.header("EMAIL", "enaenen@naver.com")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(userUpdateDto))
+						.content(objectMapper.writeValueAsString(userUpdate))
 				)
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(1))

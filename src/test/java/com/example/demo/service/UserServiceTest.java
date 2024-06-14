@@ -4,12 +4,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 
-import com.example.demo.exception.CertificationCodeNotMatchedException;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.UserStatus;
-import com.example.demo.model.dto.UserCreateDto;
-import com.example.demo.model.dto.UserUpdateDto;
-import com.example.demo.repository.UserEntity;
+import com.example.demo.user.exception.CertificationCodeNotMatchedException;
+import com.example.demo.user.exception.ResourceNotFoundException;
+import com.example.demo.user.domain.UserStatus;
+import com.example.demo.user.domain.UserCreate;
+import com.example.demo.user.domain.UserUpdate;
+import com.example.demo.user.repository.UserEntity;
+import com.example.demo.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ public class UserServiceTest {
   @Test
   void userCreateDto_를_이용하여_유저를_생성할_수_있다(){
     //given
-    UserCreateDto userCreateDto = UserCreateDto.builder()
+    UserCreate userCreateDto = UserCreate.builder()
         .email("enaenen@naver.com")
         .address("서울시 강남구")
         .nickname("enaenen")
@@ -99,13 +100,13 @@ public class UserServiceTest {
   @Test
   void userCreateDto_를_이용하여_유저를_수정할_수_있다(){
     //given
-    UserUpdateDto userUpdateDto = UserUpdateDto.builder()
+    UserUpdate userUpdate = UserUpdate.builder()
         .address("경기도 성남시")
         .nickname("enaenen-1")
         .build();
 
     //when
-   userService.update(1, userUpdateDto);
+   userService.update(1, userUpdate);
 
     //then
     UserEntity userEntity = userService.getById(1);

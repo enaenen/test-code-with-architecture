@@ -4,7 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.demo.model.dto.PostCreateDto;
+import com.example.demo.post.domain.PostCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ class PostCreateControllerTest {
 	void 사용자는_게시물을_작성할_수_있다() throws Exception {
 
 		//given
-		PostCreateDto postCreateDto = PostCreateDto.builder()
+		PostCreate postCreate = PostCreate.builder()
 				.content("hello world")
 				.writerId(1)
 				.build();
@@ -42,7 +42,7 @@ class PostCreateControllerTest {
 		//then
 		mockMvc.perform(post("/api/posts")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(postCreateDto))
+						.content(objectMapper.writeValueAsString(postCreate))
 				)
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.id").isNumber())
